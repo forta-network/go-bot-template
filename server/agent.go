@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"forta-protocol/go-agent/protocol"
+	"github.com/forta-network/forta-core-go/protocol"
 )
 
 type Agent struct {
@@ -12,7 +12,9 @@ type Agent struct {
 }
 
 func (a *Agent) Initialize(ctx context.Context, request *protocol.InitializeRequest) (*protocol.InitializeResponse, error) {
-	panic("implement me")
+	return &protocol.InitializeResponse{
+		Status: protocol.ResponseStatus_SUCCESS,
+	}, nil
 }
 
 func (a *Agent) EvaluateTx(ctx context.Context, request *protocol.EvaluateTxRequest) (*protocol.EvaluateTxResponse, error) {
@@ -20,13 +22,16 @@ func (a *Agent) EvaluateTx(ctx context.Context, request *protocol.EvaluateTxRequ
 		Status: protocol.ResponseStatus_SUCCESS,
 		Findings: []*protocol.Finding{
 			{
-				Protocol:    "ethereum",
-				Severity:    protocol.Finding_MEDIUM,
-				Type:        protocol.Finding_INFORMATION,
-				AlertId:     "test-alert",
-				Name:        "Test Alert",
-				Metadata:    map[string]string{},
+				Protocol: "ethereum",
+				Severity: protocol.Finding_INFO,
+				Type:     protocol.Finding_INFORMATION,
+				AlertId:  "test-go-alert",
+				Name:     "Test Go Alert",
+				Metadata: map[string]string{
+					"timestamp": time.Now().UTC().Format(time.RFC3339),
+				},
 				Description: "This is a test alert",
+				Addresses:   []string{"test"},
 			},
 		},
 		Metadata:  map[string]string{},

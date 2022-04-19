@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"forta-protocol/go-agent/protocol"
-	"forta-protocol/go-agent/server"
+	"forta-network/go-agent/server"
+	"github.com/forta-network/forta-core-go/protocol"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"net"
