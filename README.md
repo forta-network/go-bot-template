@@ -1,4 +1,4 @@
-# go-bot-example
+# go-bot-template
 
 Basic example of a Bot written in golang. 
 
