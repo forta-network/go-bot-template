@@ -1,7 +1,11 @@
 # go-bot-example
 
-Basic example of an Agent written in golang
+Basic example of a Bot written in golang. 
 
+## To update your protocol version
+```
+go get github.com/forta-network/forta-core-go
+```
 
 ## To publish your image to disco
 ```
