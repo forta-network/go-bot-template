@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"forta-network/publish/cmd/publish"
 	publish_metadata "forta-network/publish/cmd/publish-metadata"
+	set_enable "forta-network/publish/cmd/set-enable"
 	"os"
 
 	generate_id "forta-network/publish/cmd/generate-id"
@@ -80,6 +82,9 @@ func main() {
 						Name:  "ipfs-gateway",
 						Value: defaultIpfsUrl,
 					},
+					&cli.StringFlag{
+						Name: "passphrase",
+					},
 				},
 				Action: func(c *cli.Context) error {
 					return publish_metadata.Run(c.Context, &publish_metadata.Params{
@@ -90,6 +95,87 @@ func main() {
 						IPFSGatewayPath: c.String("ipfs-gateway"),
 						DocFilePath:     c.String("doc-file"),
 						Image:           c.String("image"),
+					})
+				},
+			},
+			{
+				Name: "publish",
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "env",
+						Value: "prod",
+					},
+					&cli.StringFlag{
+						Name:     "manifest",
+						Required: true,
+					},
+					&cli.StringFlag{
+						Name:  "keydir",
+						Value: deployKeyPath(),
+					},
+					&cli.StringFlag{
+						Name:  "ipfs-gateway",
+						Value: defaultIpfsUrl,
+					},
+					&cli.StringFlag{
+						Name: "passphrase",
+					},
+				},
+				Action: func(c *cli.Context) error {
+					return publish.Run(c.Context, &publish.Params{
+						Environment:     c.String("env"),
+						KeyDirPath:      c.String("keydir"),
+						Passphrase:      c.String("passphrase"),
+						Manifest:        c.String("manifest"),
+						IPFSGatewayPath: c.String("ipfs-gateway"),
+					})
+				},
+			},
+			{
+				Name: "enable",
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "env",
+						Value: "prod",
+					},
+					&cli.StringFlag{
+						Name:  "keydir",
+						Value: deployKeyPath(),
+					},
+					&cli.StringFlag{
+						Name: "passphrase",
+					},
+				},
+				Action: func(c *cli.Context) error {
+					return set_enable.Run(c.Context, &set_enable.Params{
+						Environment: c.String("env"),
+						KeyDirPath:  c.String("keydir"),
+						Passphrase:  c.String("passphrase"),
+						Enable:      true,
+					})
+				},
+			},
+			{
+				Name: "disable",
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "env",
+						Value: "prod",
+					},
+					&cli.StringFlag{
+						Name:  "keydir",
+						Value: deployKeyPath(),
+					},
+					&cli.StringFlag{
+						Name: "passphrase",
+					},
+				},
+				Action: func(c *cli.Context) error {
+					return set_enable.Run(c.Context, &set_enable.Params{
+						Environment: c.String("env"),
+						KeyDirPath:  c.String("keydir"),
+						Passphrase:  c.String("passphrase"),
+						Enable:      false,
 					})
 				},
 			},

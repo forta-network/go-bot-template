@@ -30,6 +30,7 @@ push-dev:
 	@echo ${cid}@sha256:${imageDigest}
 	$(eval manifest = $(shell ./publish-cli publish-metadata --image "${cid}@sha256:${imageDigest}" --doc-file docs/README.md --env dev))
 	@echo "pushed metadata to dev: ${manifest}"
+	./publish-cli publish --manifest  ${manifest} --env dev
 
 push: init-id
 	@docker tag ${TAG} ${DEV_REPO}/${TAG}
@@ -38,6 +39,19 @@ push: init-id
 	@echo ${cid}@sha256:${imageDigest}
 	$(eval manifest = $(shell ./publish-cli publish-metadata --image "${cid}@sha256:${imageDigest}" --doc-file docs/README.md --env prod))
 	@echo "pushed metadata to prod: ${manifest}"
+	./publish-cli publish --manifest ${manifest} --env prod
+
+disable-dev:
+	./publish-cli disable --env dev
+
+disable:
+	./publish-cli disable --env prod
+
+enable-dev:
+	./publish-cli enable --env dev
+
+enable:
+	./publish-cli enable --env prod
 
 publish-dev: build-cli build push-dev
 

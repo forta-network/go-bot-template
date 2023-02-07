@@ -3,7 +3,7 @@ module forta-network/go-agent
 go 1.19
 
 require (
-	github.com/forta-network/forta-core-go v0.0.0-20230202181033-aa3e495e14f1
+	github.com/forta-network/forta-core-go v0.0.0-20230207180329-3425d3c96e89
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.8.0
 	google.golang.org/grpc v1.47.0

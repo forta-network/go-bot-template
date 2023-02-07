@@ -41,7 +41,6 @@ func getID() (string, error) {
 	return string(b), nil
 }
 func Run(ctx context.Context, cfg *Params) error {
-	time.Sleep(5 * time.Second)
 	b, err := os.ReadFile(cfg.BotManifestPath)
 	if err != nil {
 		return err
