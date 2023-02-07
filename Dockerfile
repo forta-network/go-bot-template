@@ -1,4 +1,5 @@
 FROM alpine AS base
+LABEL "network.forta.settings.agent-logs.enable"="true"
 
 FROM golang:1.19.1 AS go-builder
 WORKDIR /go/app

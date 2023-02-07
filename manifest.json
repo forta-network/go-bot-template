@@ -1,0 +1,14 @@
+{
+  "name": "go template bot",
+  "version": "0.0.1",
+  "publishedFrom": "Go Bot Template",
+  "repository": "",
+  "projects": [],
+  "chainIds": [1],
+  "chainSettings": {
+    "default": {
+      "shards": 1,
+      "target": 1
+    }
+  }
+}
