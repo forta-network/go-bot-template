@@ -85,6 +85,9 @@ func main() {
 					&cli.StringFlag{
 						Name: "passphrase",
 					},
+					&cli.StringFlag{
+						Name: "bot-id",
+					},
 				},
 				Action: func(c *cli.Context) error {
 					return publish_metadata.Run(c.Context, &publish_metadata.Params{
@@ -95,6 +98,7 @@ func main() {
 						IPFSGatewayPath: c.String("ipfs-gateway"),
 						DocFilePath:     c.String("doc-file"),
 						Image:           c.String("image"),
+						BotID:           c.String("bot-id"),
 					})
 				},
 			},
@@ -145,12 +149,16 @@ func main() {
 					&cli.StringFlag{
 						Name: "passphrase",
 					},
+					&cli.StringFlag{
+						Name: "bot-id",
+					},
 				},
 				Action: func(c *cli.Context) error {
 					return set_enable.Run(c.Context, &set_enable.Params{
 						Environment: c.String("env"),
 						KeyDirPath:  c.String("keydir"),
 						Passphrase:  c.String("passphrase"),
+						BotID:       c.String("bot-id"),
 						Enable:      true,
 					})
 				},

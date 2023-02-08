@@ -16,6 +16,7 @@ type Params struct {
 	Passphrase  string
 	Environment string
 	Enable      bool
+	BotID       string
 }
 
 func getID() (string, error) {
@@ -32,10 +33,13 @@ func Run(ctx context.Context, cfg *Params) error {
 		fmt.Println("Please run `./publish-cli initialize` first to generate a private key")
 		return err
 	}
-	agentID, err := getID()
-	if err != nil {
-		fmt.Println("bad state, ID not initialized in ./.settings/botId")
-		return err
+	agentID := cfg.BotID
+	if agentID == "" {
+		agentID, err = getID()
+		if err != nil {
+			fmt.Println("bad state, ID not initialized in ./.settings/botId")
+			return err
+		}
 	}
 
 	var r registry.Client

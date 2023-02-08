@@ -23,6 +23,7 @@ type Params struct {
 	IPFSGatewayPath string
 	Environment     string
 	Image           string
+	BotID           string
 }
 
 func compactJson(s string) string {
@@ -78,14 +79,17 @@ func Run(ctx context.Context, cfg *Params) error {
 		return err
 	}
 
-	ID, err := getID()
-	if err != nil {
-		return err
+	botID := cfg.BotID
+	if botID == "" {
+		botID, err = getID()
+		if err != nil {
+			return err
+		}
 	}
 
 	m, _ = sjson.Set(m, "manifest.imageReference", cfg.Image)
-	m, _ = sjson.Set(m, "manifest.agentIdHash", ID)
-	m, _ = sjson.Set(m, "manifest.agentId", ID)
+	m, _ = sjson.Set(m, "manifest.agentIdHash", botID)
+	m, _ = sjson.Set(m, "manifest.agentId", botID)
 	m, _ = sjson.Set(m, "manifest.from", k.Address.Hex())
 	m, _ = sjson.Set(m, "manifest.timestamp", time.Now().UTC().Format(time.RFC3339))
 	m, _ = sjson.Set(m, "manifest.documentation", docIpfsRef)
