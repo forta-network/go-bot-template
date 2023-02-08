@@ -5,7 +5,8 @@ DEV_REPO = disco-dev.forta.network
 REPO = disco.forta.network
 
 build-cli:
-	cd cli; make build; mv publish-cli ../;
+	rm publish-cli
+	wget https://github.com/forta-network/go-bot-publish-cli/releases/download/v0.0.1/publish-cli
 
 publish-manifest-dev: build-cli
 	$(eval manifest = $(shell ./publish-cli publish --manifest manifest-template.json --env dev))
