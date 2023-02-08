@@ -7,11 +7,17 @@ Basic example of a Bot written in golang.
 go get github.com/forta-network/forta-core-go
 ```
 
-## To publish your image to disco
+## To publish your bot 
 ```
 make publish
 ```
 
-## To deploy
+## To enable
+```
+make enable
+```
 
-Visit https://app.forta.network and deploy your bot using the output of the publish step.
+## To disable
+```
+make disable
+```
