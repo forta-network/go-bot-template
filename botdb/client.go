@@ -28,6 +28,8 @@ type Scope string
 var ScopeBot Scope = "bot"
 var ScopeScanner Scope = "scanner"
 
+var ScopeOwner Scope = "owner"
+
 type client struct {
 	apiHost        string
 	jwtProviderUrl string
@@ -111,7 +113,7 @@ func (c *client) Del(scope Scope, objID string) error {
 }
 
 func (c *client) Get(scope Scope, objID string) ([]byte, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf(urlPattern, scope, objID), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf(urlPattern, c.apiHost, scope, objID), nil)
 	if err != nil {
 		return nil, err
 	}
